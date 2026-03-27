@@ -39,10 +39,14 @@ AppBuilder One provides **15 skills** that cover the full development lifecycle:
 - **`/design-module`** — Design individual modules section by section
 
 ### Development
+- **`/init`** — Scaffold project from stack config (install deps, create files)
 - **`/new-feature`** — Add features day-to-day
+- **`/api-contract`** — Define API contracts before implementing
+- **`/db-migrate`** — Database migrations (create, apply, rollback, seed)
 - **`/check-security`** — Security vulnerability scanning
 - **`/check-performance`** — Performance analysis and budgets
 - **`/deploy`** — Deploy strategies per hosting provider
+- **`/status`** — Project status dashboard
 
 ## Adaptive Complexity
 

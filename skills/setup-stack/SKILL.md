@@ -202,7 +202,46 @@ Skip for learning mode.
 - File naming conventions
 - Folder structure
 
-#### Q8: Internationalization (i18n)
+#### Q8: Testing (All modes)
+
+> What level of testing do you want?
+>
+> **A) Basic** — Unit tests for business logic only.
+>
+> **B) Standard** — Unit + integration tests.
+>
+> **C) Full** — Unit + integration + E2E (browser tests).
+
+Recommended frameworks based on stack:
+
+| Stack | Unit/Integration | E2E |
+|-------|-----------------|-----|
+| Next.js / React | **Vitest** + Testing Library | **Playwright** |
+| FastAPI | **pytest** + httpx | Playwright |
+| Express | **Vitest** / Jest | Playwright |
+| Laravel | **PHPUnit** (built-in) | Playwright |
+
+**Playwright** is the recommended E2E framework for all stacks — cross-browser,
+fast, excellent DX. Claude can write and run Playwright tests.
+
+#### Q9: Git Workflow
+
+> How do you want to work with Git?
+>
+> **A) Simple** — Work on `main`, commit directly. Good for learning and solo.
+>
+> **B) Trunk-based** — Short-lived feature branches, merge to `main` via PR.
+> Recommended for most projects.
+>
+> **C) GitFlow** — `main` + `develop` + feature/release/hotfix branches.
+> For projects with formal releases.
+
+If B or C, configure:
+- Branch naming convention: `feature/[name]`, `hotfix/[name]`
+- Conventional commits: `feat:`, `fix:`, `chore:`, `docs:`
+- PR template in `.github/pull_request_template.md`
+
+#### Q10: Internationalization (i18n)
 
 > Will your app need multiple languages?
 >
@@ -226,7 +265,7 @@ If B or C:
 **Rule added to coding standards**: All user-facing strings must use
 translation keys. No hardcoded text in components.
 
-#### Q9: GDPR & Data Privacy (Solo/Team/Enterprise)
+#### Q11: GDPR & Data Privacy (Solo/Team/Enterprise)
 
 Skip for learning mode.
 
@@ -261,7 +300,7 @@ If C:
 **Rule**: GDPR requirements become acceptance criteria in every module
 that handles personal data.
 
-#### Q10: AI Features
+#### Q12: AI Features
 
 > Will your app use AI (LLMs, embeddings, classification, etc.)?
 >
@@ -303,7 +342,7 @@ If C (advanced):
 > hiring, content moderation), the EU AI Act may classify it as high-risk.
 > I'll add compliance checks to your requirements validation.
 
-#### Q11: Extras (optional)
+#### Q13: Extras (optional)
 
 > Any of these? (skip any you don't need)
 >
@@ -385,6 +424,8 @@ Infrastructure: [pack name]
   Domain:       [choice or "later"]
 Architecture:   [DDD / Standard / N/A]
 Frontend Rules: [Guided / Free / N/A]
+Testing:        [Basic / Standard / Full (+ E2E)]
+Git Workflow:   [Simple / Trunk-based / GitFlow]
 i18n:           [No / Yes (library) / Ready for later]
 GDPR:           [No / Basic / Full]
 AI Provider:    [None / Groq / OpenAI / Anthropic / Ollama / OpenRouter]

@@ -19,9 +19,13 @@
 | `/appbuilder-one:map-modules` | Decompose into modules | All |
 | `/appbuilder-one:design-module` | Design individual module | All |
 | `/appbuilder-one:new-feature` | Add features day-to-day | All |
+| `/appbuilder-one:init` | Scaffold project from stack config | All |
+| `/appbuilder-one:api-contract` | Define API contracts before implementing | All |
+| `/appbuilder-one:db-migrate` | Database migrations (create, apply, rollback) | All |
 | `/appbuilder-one:check-security` | Security vulnerability scan | All |
 | `/appbuilder-one:check-performance` | Performance analysis | All |
 | `/appbuilder-one:deploy` | Deploy with strategies per hosting | All |
+| `/appbuilder-one:status` | Project status dashboard | All |
 
 ## Project Modes
 
