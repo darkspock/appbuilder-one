@@ -1,0 +1,39 @@
+# Dependencies
+node_modules/
+vendor/
+.venv/
+
+# Environment
+.env
+.env.local
+.env.production
+
+# Build output
+dist/
+build/
+.next/
+.nuxt/
+.svelte-kit/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+
+# Session state (ephemeral)
+production/session-state/
+production/session-logs/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Testing
+coverage/
+.nyc_output/
+
+# Database
+*.sqlite
+*.sqlite3
