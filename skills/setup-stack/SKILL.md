@@ -202,7 +202,108 @@ Skip for learning mode.
 - File naming conventions
 - Folder structure
 
-#### Q8: Extras (optional)
+#### Q8: Internationalization (i18n)
+
+> Will your app need multiple languages?
+>
+> **A) No** — Single language only.
+>
+> **B) Yes, from the start** — I want to set up i18n now so all text is
+> translatable from day one.
+>
+> **C) Later** — Not now, but I want the architecture ready to add it.
+
+If B or C:
+> Recommended setup:
+> - **next-intl** (for Next.js) or **react-i18next** (for React SPA)
+> - Translation files in `locales/[lang].json`
+> - All user-facing text via translation keys — no hardcoded strings
+> - Default language: [ask which]
+>
+> If C (later): Set up the library and folder structure now, but only
+> create the default language file. Adding languages later is trivial.
+
+**Rule added to coding standards**: All user-facing strings must use
+translation keys. No hardcoded text in components.
+
+#### Q9: GDPR & Data Privacy (Solo/Team/Enterprise)
+
+Skip for learning mode.
+
+> Does your app handle personal data from EU users?
+>
+> **A) No** — No personal data or non-EU only.
+>
+> **B) Yes, basic** — User accounts with email, name, etc.
+>
+> **C) Yes, sensitive** — Health data, financial data, minors, etc.
+
+If B:
+> I'll add basic GDPR requirements to your project:
+> - Cookie consent mechanism
+> - Privacy policy page (template)
+> - User data export capability (right to portability)
+> - User account deletion (right to be forgotten)
+> - Consent tracking in database
+> - Data processing documentation
+
+If C:
+> Full GDPR compliance needed. I'll add:
+> - Everything from B, plus:
+> - Data Protection Impact Assessment template
+> - Data processing register
+> - Encryption requirements for sensitive fields
+> - Audit logging for all data access
+> - Data retention policies
+> - Breach notification procedure
+> - DPO (Data Protection Officer) requirements check
+
+**Rule**: GDPR requirements become acceptance criteria in every module
+that handles personal data.
+
+#### Q10: AI Features
+
+> Will your app use AI (LLMs, embeddings, classification, etc.)?
+>
+> **A) No** — No AI features planned.
+>
+> **B) Yes, basic** — Text generation, summarization, chat features.
+>
+> **C) Yes, advanced** — Embeddings, RAG, classification, fine-tuning.
+
+If B or C, recommend provider:
+
+> **AI Provider recommendation:**
+>
+> | Provider | Best for | Cost | Speed |
+> |----------|----------|------|-------|
+> | **Groq** | Fast inference, chat features, real-time | Very cheap | Ultra-fast |
+> | **OpenAI** | GPT-4, DALL-E, Whisper, ecosystem | Moderate | Fast |
+> | **Anthropic (Claude)** | Complex reasoning, long context, coding | Moderate | Fast |
+> | **OpenRouter** | Access to ALL models via one API (Groq, OpenAI, Claude, Llama, Mistral...) | Varies by model | Varies |
+> | **Ollama (local)** | Privacy, no API costs, development | Free | Depends on hardware |
+>
+> **My recommendation by use case:**
+> - Chat / text generation → **Groq** (fastest, cheapest)
+> - Complex reasoning / analysis → **OpenAI** or **Anthropic**
+> - Embeddings / RAG → **OpenAI** (text-embedding-3) + **pgvector** (Supabase/PostgreSQL)
+> - Privacy-critical → **Ollama** (runs locally)
+> - Multiple models / flexibility → **OpenRouter** (one API key, all models, switch anytime)
+> - Multiple needs → **Groq** for speed + **OpenAI** for quality (mix and match)
+
+If C (advanced):
+> For RAG / embeddings, I'll recommend:
+> - **pgvector** extension for PostgreSQL (vector search in your existing DB)
+> - Supabase has pgvector built-in
+> - Embedding model: OpenAI `text-embedding-3-small` (cheap, good quality)
+> - Chunking strategy as part of module design
+
+**EU AI Act note** (Enterprise mode):
+> If your app makes automated decisions that affect users (credit scoring,
+> hiring, content moderation), the EU AI Act may classify it as high-risk.
+> I'll add compliance checks to your requirements validation.
+
+#### Q11: Extras (optional)
 
 > Any of these? (skip any you don't need)
 >
@@ -211,6 +312,7 @@ Skip for learning mode.
 > - **Component Library**: shadcn/ui / Radix / MUI / Ant Design
 > - **Email**: Resend / SendGrid / Postmark
 > - **File storage**: S3 / Cloudflare R2 / Supabase Storage
+> - **Payments**: Stripe / Lemon Squeezy
 
 ### 3. Update CLAUDE.md
 
@@ -283,14 +385,17 @@ Infrastructure: [pack name]
   Domain:       [choice or "later"]
 Architecture:   [DDD / Standard / N/A]
 Frontend Rules: [Guided / Free / N/A]
+i18n:           [No / Yes (library) / Ready for later]
+GDPR:           [No / Basic / Full]
+AI Provider:    [None / Groq / OpenAI / Anthropic / Ollama / OpenRouter]
 
 CLI Tools Available:
   [list of CLIs Claude can use for the chosen stack]
 
 Next Steps:
-1. Run /brainstorm to define your product
-2. Run /map-modules to decompose into modules
-3. Run /prototype to scaffold the base app
+1. Run /appbuilder-one:brainstorm to define your product
+2. Run /appbuilder-one:map-modules to decompose into modules
+3. Run /appbuilder-one:new-feature to start building
 ```
 
 ## CLI Tools Reference
