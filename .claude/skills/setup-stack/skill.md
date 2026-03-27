@@ -56,45 +56,85 @@ Only ask if they chose a SPA or HTMX approach:
 > | Rails | Ruby | Convention over configuration |
 > | Go + Gin | Go | Performance-critical APIs |
 
-#### Q4: Database
+#### Q4: Infrastructure Pack
 
-> Database?
+Instead of asking DB, Auth, and Hosting separately, recommend a **pack**
+based on the user's mode and project type. Present the recommended pack
+first, then offer alternatives.
+
+**Pack recommendations by mode:**
+
+##### Learning Pack (€0/mo)
+> For learning, I recommend **Supabase** — it gives you database, auth, and
+> hosting in one place, all free:
 >
-> | Database | Best for |
-> |----------|----------|
-> | **PostgreSQL** | Most SaaS apps. Industry standard. Recommended. |
-> | **MySQL** | Simpler apps, wide hosting support |
-> | **SQLite** | Prototypes, small apps, zero config |
-> | **MongoDB** | Document-heavy, flexible schema |
-
-**For learning mode**: Default to SQLite or PostgreSQL with a note.
-
-#### Q5: Auth
-
-> How do you want to handle authentication?
+> - **Database**: PostgreSQL (hosted by Supabase)
+> - **Auth**: Supabase Auth (built-in)
+> - **Hosting**: Supabase (backend) + Vercel (frontend)
+> - **Domain**: Not needed yet
+> - **Cost**: Free
 >
-> | Option | Best for | Cost |
-> |--------|----------|------|
-> | **Built-in** | Learning, full control | Free |
-> | **Supabase Auth** | Quick setup, Postgres-native | Free tier |
-> | **Auth0** | Enterprise, complex requirements | Free tier |
-> | **Clerk** | Beautiful UI, fast integration | Free tier |
-> | **NextAuth/Auth.js** | Next.js projects | Free |
+> Alternatively, everything local: SQLite + built-in auth + localhost.
 
-#### Q6: Hosting
-
-> Where do you want to deploy?
+##### Solo Fast Pack (~$5-10/mo)
+> For a real project with minimal ops:
 >
-> | Option | Best for | Cost |
-> |--------|----------|------|
-> | **Vercel** | Next.js, easy deploys | Free tier |
-> | **Railway** | Full-stack, DB included | Free tier |
-> | **Fly.io** | Docker, edge deployment | Free tier |
-> | **Supabase** | Backend-as-service + Postgres | Free tier |
-> | **VPS (Hetzner/DO)** | Full control, predictable cost | ~$5/mo |
-> | **AWS** | Enterprise, scalable | Pay-as-you-go |
+> - **Database**: PostgreSQL (via Railway or Supabase)
+> - **Auth**: Supabase Auth / Auth.js / Clerk
+> - **Hosting**: Railway (full-stack) or Vercel + Supabase
+> - **Domain**: Cloudflare (~$10/year, cheapest + best DNS)
+> - **Cost**: $0-10/mo
 
-#### Q7: Backend Architecture (Solo/Team/Enterprise only)
+##### Solo Budget Pack (~€4/mo)
+> Maximum control, minimum cost:
+>
+> - **Database**: PostgreSQL (self-hosted on VPS)
+> - **Auth**: Built-in or Supabase Auth
+> - **Hosting**: Hetzner/OVH VPS + Coolify (self-hosted PaaS)
+> - **Domain**: Cloudflare (~$10/year)
+> - **Cost**: ~€4/mo
+>
+> Coolify gives you a Railway-like experience on your own VPS.
+
+##### Team Pack (~$20-50/mo)
+> Production-ready for a real product:
+>
+> - **Database**: PostgreSQL (Railway / Supabase / managed)
+> - **Auth**: Auth0 / Clerk
+> - **Hosting**: Railway / Fly.io / Vercel
+> - **Domain**: Cloudflare
+> - **Cost**: $20-50/mo
+
+##### Enterprise Pack (variable)
+> Full control, compliance-ready:
+>
+> - **Database**: PostgreSQL / MySQL (AWS RDS or dedicated)
+> - **Auth**: Auth0 / Custom
+> - **Hosting**: AWS (full suite) or Hetzner dedicated
+> - **Domain**: Cloudflare
+> - **Cost**: Variable
+>
+> **Note on AWS**: Claude Code can manage all AWS resources directly via
+> `aws` CLI — creating EC2 instances, RDS databases, S3 buckets, Lambda
+> functions, IAM roles, CloudFront distributions, etc. No console needed.
+
+After presenting the recommended pack, ask:
+> "Does this pack work for you, or would you like to customize any part?"
+
+Allow mixing: e.g., take the Solo Fast pack but swap Railway for Hetzner.
+
+#### Q5: Domain (if hosting pack includes one)
+
+> For domains, I recommend **Cloudflare Registrar**:
+> - Domains at cost (~$10/year for .com)
+> - Free DNS, CDN, and DDoS protection
+> - Full API — Claude can manage DNS records via `wrangler` CLI
+>
+> Other options: Namecheap, Porkbun, Vercel Domains
+>
+> Do you want to set up a domain now, or later?
+
+#### Q6: Backend Architecture (Solo/Team/Enterprise only)
 
 Skip for learning mode.
 
@@ -128,7 +168,7 @@ many entities and business rules.
 - Naming conventions
 - Key patterns (services, middleware, etc.)
 
-#### Q8: Frontend Design Rules (Solo/Team/Enterprise only)
+#### Q7: Frontend Design Rules (Solo/Team/Enterprise only)
 
 Skip for learning mode.
 
@@ -157,7 +197,7 @@ Skip for learning mode.
 - File naming conventions
 - Folder structure
 
-#### Q9: Extras (optional)
+#### Q8: Extras (optional)
 
 > Any of these? (skip any you don't need)
 >
@@ -183,7 +223,7 @@ Present to user for approval before writing.
 
 ### 5. Generate Architecture Docs
 
-Based on Q7 and Q8 answers:
+Based on Q6 and Q7 answers:
 - Backend architecture doc (DDD or standard)
 - Frontend standards doc (guided or free)
 
@@ -203,14 +243,19 @@ Ask before creating each.
 ```
 Stack Setup Complete
 ====================
-Mode:        [learning / solo / team / enterprise]
-Frontend:    [choice]
-Backend:     [choice]
-Database:    [choice]
-Auth:        [choice]
-Hosting:     [choice]
-Architecture: [DDD / Standard / N/A]
+Mode:           [learning / solo / team / enterprise]
+Frontend:       [choice]
+Backend:        [choice]
+Infrastructure: [pack name]
+  Database:     [choice]
+  Auth:         [choice]
+  Hosting:      [choice]
+  Domain:       [choice or "later"]
+Architecture:   [DDD / Standard / N/A]
 Frontend Rules: [Guided / Free / N/A]
+
+CLI Tools Available:
+  [list of CLIs Claude can use for the chosen stack]
 
 Next Steps:
 1. Run /brainstorm to define your product
@@ -218,9 +263,29 @@ Next Steps:
 3. Run /prototype to scaffold the base app
 ```
 
+## CLI Tools Reference
+
+Claude Code can manage infrastructure directly via CLI:
+
+| Service | CLI | What Claude can do |
+|---------|-----|-------------------|
+| Supabase | `supabase` | Create project, migrations, deploy edge functions |
+| Vercel | `vercel` | Deploy, env vars, domains, preview |
+| Railway | `railway` | Deploy, create DB, env vars |
+| Hetzner | `hcloud` | Create VPS, firewall, networks |
+| AWS | `aws` | Everything: EC2, RDS, S3, Lambda, IAM, CloudFront |
+| Cloudflare | `wrangler` | DNS records, Workers, Pages, R2, domains |
+| Fly.io | `fly` | Deploy, scaling, volumes |
+| Coolify | API | Deploy via REST API |
+
+When the user chooses a hosting provider, note which CLI tools are available
+and suggest installing them.
+
 ## Guardrails
 
 - NEVER guess versions — verify or ask
 - NEVER overwrite existing config without asking
 - One question at a time
 - Adapt depth to project mode
+- Present recommended pack first, then alternatives
+- Always mention CLI capabilities for the chosen stack

@@ -79,6 +79,8 @@ Epic → Validate → Slice (if big) → Design → Tasks → Implement → Revi
 | `/map-modules` | Decompose into modules | All |
 | `/design-module` | Design individual module | All |
 | `/new-feature` | Add feature day-to-day | All |
+| `/check-security` | Security vulnerability scan | All (depth varies) |
+| `/check-performance` | Performance analysis | All (depth varies) |
 | `/code-review` | Review code quality | Solo+, Team, Enterprise |
 | `/sprint-plan` | Plan sprint | All |
 | `/prototype` | Rapid prototype | All |
