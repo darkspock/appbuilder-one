@@ -1,108 +1,62 @@
-# AppBuilder One — Web App Development Architecture
+# AppBuilder One — Plugin Reference
 
-SaaS and management app development managed through coordinated Claude Code agents.
-Adapts to your experience level and project complexity.
+> This file is the plugin's internal reference. When installed as a plugin,
+> skills are available as `/appbuilder-one:skill-name` in any project.
 
-## Project Mode
-
-@.claude/docs/project-mode.md
-
-## Technology Stack
-
-- **Type**: Web application (SaaS / management)
-- **Frontend**: [CHOOSE — run /setup-stack]
-- **Backend**: [CHOOSE — run /setup-stack]
-- **Database**: [CHOOSE — run /setup-stack]
-- **Auth**: [CHOOSE — run /setup-stack]
-- **Hosting**: [CHOOSE — run /setup-stack]
-- **Architecture**: [Standard / DDD — run /setup-stack]
-- **Frontend Rules**: [Free / Guided — run /setup-stack]
-- **Version Control**: Git with trunk-based development
-
-## Project Structure
-
-@.claude/docs/directory-structure.md
-
-## Technical Preferences
-
-@.claude/docs/technical-preferences.md
-
-## Architecture
-
-@.claude/docs/architecture/backend-architecture.md
-@.claude/docs/architecture/frontend-standards.md
-
-## Coordination Rules
-
-@.claude/docs/coordination-rules.md
-
-## Collaboration Protocol
-
-**User-driven collaboration, not autonomous execution.**
-Every task follows: **Question -> Options -> Decision -> Draft -> Approval**
-
-- Agents MUST ask "May I write this to [filepath]?" before using Write/Edit tools
-- Agents MUST show drafts or summaries before requesting approval
-- Multi-file changes require explicit approval for the full changeset
-- No commits without user instruction
-
-> **First session?** Run `/start` to begin the guided onboarding flow.
-
-## Development Workflow
-
-The framework has two processes:
-
-| Process | Question | When |
-|---------|----------|------|
-| **Product Discovery** | "Should we build this?" | New features, high uncertainty |
-| **Development** | "How do we build this?" | After Discovery validates (or for low-risk items) |
-
-### Development Flow (per feature)
-
-```
-Epic → Validate → Slice (if big) → Design → Tasks → Implement → Review → Deploy
-```
-
-### Available Skills
+## Skills
 
 | Skill | Purpose | Modes |
 |-------|---------|-------|
-| `/start` | Onboarding, profile detection | All |
-| `/setup-stack` | Configure technology stack | All |
-| `/brainstorm` | Define product concept | All |
-| `/discovery` | Product Discovery (validate opportunity) | Solo+, Team, Enterprise |
-| `/epic` | Write epic/PRD | Solo+, Team, Enterprise |
-| `/requirement-validate` | Validate requirements | Solo+, Team, Enterprise |
-| `/requirement-slicing` | Slice epic into features | Team, Enterprise |
-| `/requirement-design` | Technical design for feature | All |
-| `/requirement-tasks` | Generate implementation tasks | All |
-| `/map-modules` | Decompose into modules | All |
-| `/design-module` | Design individual module | All |
-| `/new-feature` | Add feature day-to-day | All |
-| `/check-security` | Security vulnerability scan | All (depth varies) |
-| `/check-performance` | Performance analysis | All (depth varies) |
-| `/code-review` | Review code quality | Solo+, Team, Enterprise |
-| `/sprint-plan` | Plan sprint | All |
-| `/prototype` | Rapid prototype | All |
-| `/deploy` | Deployment checklist | Team, Enterprise |
+| `/appbuilder-one:start` | Onboarding + profile detection | All |
+| `/appbuilder-one:setup-stack` | Configure stack + infrastructure pack | All |
+| `/appbuilder-one:brainstorm` | Define product concept | All |
+| `/appbuilder-one:discovery` | Product Discovery (validate opportunity) | Solo+, Team, Enterprise |
+| `/appbuilder-one:epic` | Write epic/PRD | Solo+, Team, Enterprise |
+| `/appbuilder-one:requirement-validate` | Validate requirements | Solo+, Team, Enterprise |
+| `/appbuilder-one:requirement-slicing` | Slice epic into features | Team, Enterprise |
+| `/appbuilder-one:requirement-design` | Technical design for feature | All |
+| `/appbuilder-one:requirement-tasks` | Generate implementation tasks | All |
+| `/appbuilder-one:map-modules` | Decompose into modules | All |
+| `/appbuilder-one:design-module` | Design individual module | All |
+| `/appbuilder-one:new-feature` | Add features day-to-day | All |
+| `/appbuilder-one:check-security` | Security vulnerability scan | All |
+| `/appbuilder-one:check-performance` | Performance analysis | All |
+| `/appbuilder-one:deploy` | Deploy with strategies per hosting | All |
 
-## Coding Standards
+## Project Modes
 
-@.claude/docs/coding-standards.md
+| Mode | Target | Framework Depth |
+|------|--------|----------------|
+| **Learning** | First-time dev, learning project | Minimal docs, simple stack |
+| **Solo** | Solo dev, real project | Light docs, architecture choice |
+| **Team** | Small team, product | Full docs, review gates |
+| **Enterprise** | Professional, compliance needed | Full + compliance + RACI |
 
-## Context Management
+## Stack Decisions
 
-@.claude/docs/context-management.md
+**Frontend (fixed):** React + Tailwind + shadcn/ui + Lucide React (no SVGs)
+**Backend (by language):** FastAPI (Python) / Next.js API (TypeScript) / Express (Node) / Laravel (PHP)
+**Infrastructure packs:** Learning (Supabase free) / Solo Fast (Railway) / Solo Budget (Hetzner+Coolify) / Team (Railway/AWS) / Enterprise (AWS)
+
+## Recommended Plugins & MCPs
+
+- **context7 MCP** — Up-to-date docs for React, Tailwind, shadcn/ui, etc.
+- **frontend-design plugin** — Anthropic's official frontend design skill
+- **gh CLI** — Required for all GitHub operations and deploy workflows
+
+## Reference Docs
+
+Plugin ships with reference docs in `docs-plugin/`:
+- `coding-standards.md` — Code quality rules
+- `technical-preferences.md` — Stack preferences template
+- `coordination-rules.md` — Agent coordination
+- `context-management.md` — Context window management
+- `templates/` — Document templates (product-concept, module-design, epic, etc.)
 
 ## Hierarchy of Technical Impact
 
-When writing requirements, not all specifications are equal:
-
 | Level | What | Cost of Error |
 |-------|------|---------------|
-| **1. Foundation** | Entities, business logic, integration contracts | **Critical** — define 100% before coding |
-| **2. Behavior** | Flows, states, edge cases | **Medium** — define expected behavior |
-| **3. Aesthetics** | Colors, spacing, copywriting | **Low** — can be iterative |
-
-> Get Level 1 right, or pay the cost forever. Errors at the foundation level
-> create a domino effect where each fix needs another fix.
+| **1. Foundation** | Entities, business logic, integration contracts | **Critical** |
+| **2. Behavior** | Flows, states, edge cases | **Medium** |
+| **3. Aesthetics** | Colors, spacing, copywriting | **Low** |

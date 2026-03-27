@@ -1,0 +1,10 @@
+{
+  "name": "appbuilder-one",
+  "description": "AI-driven web app development framework for SaaS and management apps. From idea to deployment with adaptive complexity. Includes product discovery, spec-driven development, infrastructure setup, security and performance checks.",
+  "version": "0.1.0",
+  "author": {
+    "name": "darkspock"
+  },
+  "repository": "https://github.com/darkspock/appbuilder-one",
+  "license": "MIT"
+}
