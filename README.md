@@ -64,7 +64,7 @@ That's it. The plugin asks questions one at a time and adapts to your level.
 /status          → See where you are
 ```
 
-## 19 Skills
+## 25 Skills
 
 ### Onboarding & Setup
 | Skill | What it does |
@@ -91,13 +91,23 @@ That's it. The plugin asks questions one at a time and adapts to your level.
 | `/requirement-tasks` | Generate implementation tasks from design |
 | `/api-contract` | Define API contracts before coding (prevents front/back desync) |
 
-### Development & Operations
+### Development & Quality
 | Skill | What it does |
 |-------|-------------|
 | `/new-feature` | Add a feature: impact analysis → design → implement → test |
 | `/db-migrate` | Create, apply, rollback database migrations |
+| `/prototype` | Quick throwaway prototype to validate an idea |
+| `/code-review` | Review code for quality, security, architecture compliance |
+| `/design-review` | Review design docs for completeness and consistency |
+| `/bug-report` | Document, diagnose, and fix bugs |
 | `/check-security` | Scan for vulnerabilities (OWASP, deps, secrets, GDPR) |
 | `/check-performance` | Find N+1 queries, missing indexes, bundle bloat |
+
+### Operations & Planning
+| Skill | What it does |
+|-------|-------------|
+| `/architecture-decision` | Create ADR documenting a technical decision |
+| `/sprint-plan` | Plan sprints, track progress, run retrospectives |
 | `/deploy` | Deploy to Vercel, Railway, Hetzner, AWS, Fly.io, Docker |
 | `/status` | Project dashboard: progress, tests, deploys, next actions |
 

@@ -22,8 +22,14 @@
 | `/appbuilder-one:init` | Scaffold project from stack config | All |
 | `/appbuilder-one:api-contract` | Define API contracts before implementing | All |
 | `/appbuilder-one:db-migrate` | Database migrations (create, apply, rollback) | All |
+| `/appbuilder-one:prototype` | Quick throwaway prototype | All |
+| `/appbuilder-one:code-review` | Code quality and architecture review | Solo+ |
+| `/appbuilder-one:design-review` | Design doc completeness review | Solo+ |
+| `/appbuilder-one:bug-report` | Document, diagnose, fix bugs | All |
 | `/appbuilder-one:check-security` | Security vulnerability scan | All |
 | `/appbuilder-one:check-performance` | Performance analysis | All |
+| `/appbuilder-one:architecture-decision` | Create ADR for technical decisions | Solo+ |
+| `/appbuilder-one:sprint-plan` | Plan sprints and track progress | All |
 | `/appbuilder-one:deploy` | Deploy with strategies per hosting | All |
 | `/appbuilder-one:status` | Project status dashboard | All |
 
